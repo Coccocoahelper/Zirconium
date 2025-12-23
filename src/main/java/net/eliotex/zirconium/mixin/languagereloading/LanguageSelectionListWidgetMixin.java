@@ -1,13 +1,15 @@
 package net.eliotex.zirconium.mixin.languagereloading;
 
 import net.minecraft.client.Minecraft;
-import net.minecaft.client.gui.screen.options.LanguageOptionsScreen.LanguageSelectionListWidget;
+//import net.minecaft.client.gui.screen.options.LanguageOptionsScreen.LanguageSelectionListWidget;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin({LanguageSelectionListWidget.class})
+@Mixin(
+   targets = {"net/minecraft/client/gui/screen/options/LanguageOptionsScreen$LanguageSelectionListWidget"}
+)
 public class LanguageSelectionListWidgetMixin {
    @WrapOperation(
       method = {"entryClicked"},
