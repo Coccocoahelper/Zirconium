@@ -13,7 +13,7 @@ public abstract class MinecraftServerMixin {
     @Unique private boolean queuedSave = false;
     @Unique private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger("MinecraftServer");
     @Shadow public ServerWorld[] worlds;
-    @Shadow private boolean shouldResetWorld;
+    @Shadow private boolean stopping;
 
     /**
      * @author Elio
@@ -26,7 +26,7 @@ public abstract class MinecraftServerMixin {
         }
         this.savingWorlds = true;
         try {
-            if (!this.shouldResetWorld) {
+            if (!this.stopping) {
                 for (ServerWorld serverWorld : this.worlds) {
                     if (serverWorld != null) {
                         if (!silent) {
