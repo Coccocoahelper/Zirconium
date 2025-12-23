@@ -26,9 +26,9 @@ import java.util.List;
 
 @Mixin(ServerWorld.class)
 public abstract class ServerWorldMixin {
-    @Final @Shadow private Set<ScheduledTick> field_2811; // "seen" / de-dup set
-    @Final @Shadow private TreeSet<ScheduledTick> scheduledTicks; // pending (sorted)
-    @Shadow private List<ScheduledTick> field_6729; // running
+    @Final @Shadow private Set<ScheduledTick> scheduledTicks; // "seen" / de-dup set
+    @Final @Shadow private TreeSet<ScheduledTick> scheduledTicksInOrder; // pending (sorted)
+    @Shadow private List<ScheduledTick> scheduledTicksThisTick; // running
     @Unique private final Map<Long, List<ScheduledTick>> fastScheduledTicks = new HashMap<>();
     @Unique private final Map<Long, List<ScheduledTick>> fastRunningTicks = new HashMap<>();
 
@@ -105,7 +105,7 @@ public abstract class ServerWorldMixin {
         int minChunkZ = box.minZ >> 4;
         int maxChunkZ = (box.maxZ - 1) >> 4;
 
-        // 1) pending (scheduledTicks)
+        // 1) pending (scheduledTicksInOrder)
         for (int cx = minChunkX; cx <= maxChunkX; cx++) {
             for (int cz = minChunkZ; cz <= maxChunkZ; cz++) {
                 long key = toChunkKey(cx, cz);
@@ -118,8 +118,8 @@ public abstract class ServerWorldMixin {
                     if (pos.getX() >= box.minX && pos.getX() < box.maxX && pos.getZ() >= box.minZ && pos.getZ() < box.maxZ) {
                         if (remove) {
                             it.remove(); // remove from bucket
-                            field_2811.remove(tick);
                             scheduledTicks.remove(tick);
+                            scheduledTicksInOrder.remove(tick);
                         }
                         if (pendingMatches == null) pendingMatches = new ArrayList<>();
                         pendingMatches.add(tick);
@@ -136,7 +136,7 @@ public abstract class ServerWorldMixin {
             Collections.sort(pendingMatches);
         }
 
-        // 2) running (field_6729)
+        // 2) running (scheduledTicksThisTick)
         for (int cx = minChunkX; cx <= maxChunkX; cx++) {
             for (int cz = minChunkZ; cz <= maxChunkZ; cz++) {
                 long key = toChunkKey(cx, cz);
@@ -149,8 +149,8 @@ public abstract class ServerWorldMixin {
                     if (pos.getX() >= box.minX && pos.getX() < box.maxX && pos.getZ() >= box.minZ && pos.getZ() < box.maxZ) {
                         if (remove) {
                             it.remove();
-                            field_2811.remove(tick);
-                            field_6729.remove(tick);
+                            scheduledTicks.remove(tick);
+                            scheduledTicksThisTick.remove(tick);
                         }
                         if (runningMatches == null) runningMatches = new ArrayList<>();
                         runningMatches.add(tick);
