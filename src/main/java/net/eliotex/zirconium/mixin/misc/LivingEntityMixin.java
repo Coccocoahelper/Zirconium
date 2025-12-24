@@ -23,7 +23,7 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@Shadow
 	@Final
-	private HashMap<Integer, StatusEffectInstance> ingredientSlot;
+	private HashMap<Integer, StatusEffectInstance> statusEffects;
 
 	/**
 	 * @author jss2a98aj
@@ -31,7 +31,7 @@ public abstract class LivingEntityMixin extends Entity {
 	 */
 	@Overwrite()
 	public boolean hasStatusEffect(int effectID) {
-		return ingredientSlot.size() != 0 && ingredientSlot.containsKey(effectID);
+		return statusEffects.size() != 0 && statusEffects.containsKey(effectID);
 	}
 
 	/**
@@ -40,7 +40,7 @@ public abstract class LivingEntityMixin extends Entity {
 	 */
 	@Overwrite()
 	public boolean hasStatusEffect(StatusEffect effect) {
-		return ingredientSlot.size() != 0 && ingredientSlot.containsKey(effect.id);
+		return statusEffects.size() != 0 && statusEffects.containsKey(effect.id);
 	}
 
 	/**
