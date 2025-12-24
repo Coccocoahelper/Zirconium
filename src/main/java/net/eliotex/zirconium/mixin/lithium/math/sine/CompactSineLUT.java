@@ -1,4 +1,4 @@
-package net.eliotex.zirconium.mixin.lithium.math;
+package net.eliotex.zirconium.mixin.lithium.math.sine;
 
 import net.eliotex.zirconium.mixin.lithium.math.sine.MathHelperAccessor;
 import net.minecraft.util.math.MathHelper;

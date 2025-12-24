@@ -47,11 +47,10 @@ public abstract class LivingEntityMixin extends Entity {
 	 * @author jss2a98aj
 	 * @reason Keeps the datawatcher from being updated when no change in air has occurred.
 	 */
-	@Override
+	/*@Override
 	public void setAir(int airAmount) {
 		if (getAir() != airAmount) {
 			super.setAir(airAmount);
 		}
-	}
-
+	}*/
 }
