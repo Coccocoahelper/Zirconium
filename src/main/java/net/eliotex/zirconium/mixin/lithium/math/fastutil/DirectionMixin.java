@@ -34,7 +34,7 @@ public class DirectionMixin {
      * @author JellySquid
      */
     @Overwrite
-    public static Direction random(Random rand) {
+    public static Direction pick(Random rand) {
         return ALL[rand.nextInt(ALL.length)];
     }
 

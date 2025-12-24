@@ -12,8 +12,8 @@ public class RedstoneWireBlockMixin {
 
     private static final Direction[] DIRECTIONS = Direction.values();
 
-    @Redirect(method = "updateNeighbors(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Direction;values()[Lnet/minecraft/util/math/Direction;"))
-    private Direction[] redirectUpdateNeighborsDirectionValues() {
+    @Redirect(method = "updateNeighborsOfWire(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Direction;values()[Lnet/minecraft/util/math/Direction;"))
+    private Direction[] redirectUpdateNeighborsOfWireDirectionValues() {
         return DIRECTIONS;
     }
 

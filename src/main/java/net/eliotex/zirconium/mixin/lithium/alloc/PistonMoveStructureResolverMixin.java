@@ -12,8 +12,8 @@ public class PistonMoveStructureResolverMixin {
 
     private static final Direction[] VALUES = Direction.values();
 
-    @Redirect(method = "canMoveAdjacentBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Direction;values()[Lnet/minecraft/util/math/Direction;"))
-    private Direction[] redirectCanMoveAdjacentBlockValues() {
+    @Redirect(method = "addNeighborColumns", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Direction;values()[Lnet/minecraft/util/math/Direction;"))
+    private Direction[] redirectAddNeighborColumnsValues() {
         return VALUES;
     }
 
