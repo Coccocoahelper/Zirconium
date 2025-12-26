@@ -1,6 +1,6 @@
 package net.eliotex.zirconium.mixin.misc;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +23,7 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@Shadow
 	@Final
-	private HashMap<Integer, StatusEffectInstance> statusEffects;
+	private Map<Integer, StatusEffectInstance> statusEffects;
 
 	/**
 	 * @author jss2a98aj
@@ -53,4 +53,5 @@ public abstract class LivingEntityMixin extends Entity {
 			super.setAir(airAmount);
 		}
 	}*/
+
 }
