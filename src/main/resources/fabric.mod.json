@@ -13,6 +13,17 @@
   },
   "license": "LGPL-3.0-only",
   "environment": "*",
+  "entrypoints": {
+		"client-init": [
+			"net.eliotex.zirconium.Zirconium"
+		],
+		"modmenu": [
+			"net.eliotex.zirconium.ZirconiumModMenu"
+		],
+		"axolotlclient.module": [
+			"net.eliotex.zirconium.AxolotlClientModule"
+		]
+	},
   "mixins": [
     "zirconium.mixins.json"
   ],

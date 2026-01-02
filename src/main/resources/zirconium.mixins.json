@@ -15,6 +15,7 @@
     "lithium.math.fastutil.DirectionMixin",
     "lithium.math.sine.MathHelperAccessor",
     "lithium.math.sine.MathHelperMixin",
+    "fogcontrol.GameRendererMixin",
     "misc.LivingEntityMixin"
   ],
   "client": [

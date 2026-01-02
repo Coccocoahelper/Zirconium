@@ -12,6 +12,12 @@ pluginManagement {
 			name = 'Ornithe Snapshots'
 			url = 'https://maven.ornithemc.net/snapshots'
 		}
+		maven {
+			url = "https://moehreag.duckdns.org/maven/snapshots"
+		}
+		maven {
+			url = "https://moehreag.duckdns.org/maven/releases"
+		}
 		gradlePluginPortal()
 	}
 }
