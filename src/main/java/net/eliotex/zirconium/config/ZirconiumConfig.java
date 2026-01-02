@@ -22,7 +22,7 @@ import io.github.axolotlclient.AxolotlClientConfig.api.manager.ConfigManager;
 import io.github.axolotlclient.AxolotlClientConfig.api.options.OptionCategory;
 import io.github.axolotlclient.AxolotlClientConfig.impl.managers.VersionedJsonConfigManager;
 import io.github.axolotlclient.AxolotlClientConfig.impl.options.BooleanOption;
-import io.github.axolotlclient.oldanimations.OldAnimations;
+import net.eliotex.zirconium.Zirconium;
 import lombok.Getter;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
@@ -32,7 +32,7 @@ import java.util.function.Supplier;
 
 public class ZirconiumConfig {
 
-	public static ZirconiumConfig instance = new OldAnimationsConfig();
+	public static ZirconiumConfig instance = new ZirconiumConfig();
 
 	@Getter
     private final OptionCategory category = OptionCategory.create(Zirconium.MODID);
