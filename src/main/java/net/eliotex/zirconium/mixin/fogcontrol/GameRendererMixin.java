@@ -8,9 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Simple fog control
- * In 1.12.2, fog is controlled in EntityRenderer's setupFog methods
- * This is a simplified version - full fog control would be more complex
+ * Credits to https://github.com/Sumire-Labs/Celeritas-Extra for the original, Forge 1.12.2 implementation of this!
  */
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {

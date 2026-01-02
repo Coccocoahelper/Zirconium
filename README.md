@@ -7,7 +7,11 @@ This is an Ornithe port of Eliotex's Zirconium mod, with the following optimizat
 
 - Compact sine lookup table (from Jellysquid's Lithium mod)
 
-- Effect checking by skipping if none are active (from jss2a98aj's BugTorch mod) [REMOVE THE ENTRY FROM zirconium.mixins.json, AS THIS IS CURRENTLY BROKEN]
+- Effect checking by skipping if none are active (from jss2a98aj's BugTorch mod)
+
+Additionally, it has:
+
+- A fog disabling option
 
 Currently requires Java 21 or higher.
 
