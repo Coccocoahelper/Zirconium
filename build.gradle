@@ -1,5 +1,6 @@
 plugins {
 	id 'maven-publish'
+	id 'io.freefair.lombok' version "8.12"
 	id 'net.fabricmc.fabric-loom-remap' version '1.14-SNAPSHOT'
 	id 'ploceus' version '1.14-SNAPSHOT'
 }
