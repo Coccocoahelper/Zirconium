@@ -1,4 +1,4 @@
-package com.gtnewhorizons.angelica.client.font;
+/*package com.gtnewhorizons.angelica.client.font;
 
 import com.gtnewhorizon.gtnhlib.config.ConfigurationManager;
 import com.gtnewhorizons.angelica.config.FontConfig;
@@ -302,4 +302,4 @@ public final class FontProviderCustom implements FontProvider {
     public float getYScaleMultiplier() {
         return FontConfig.customFontScale;
     }
-}
+}*/

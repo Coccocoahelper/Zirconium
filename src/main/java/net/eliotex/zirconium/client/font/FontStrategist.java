@@ -1,9 +1,9 @@
-package com.gtnewhorizons.angelica.client.font;
+package net.eliotex.zirconium.client.font;
 
 import com.google.common.collect.HashMultiset;
 import com.gtnewhorizons.angelica.config.FontConfig;
-import com.gtnewhorizons.angelica.mixins.interfaces.ResourceAccessor;
-import cpw.mods.fml.client.SplashProgress;
+//import net.eliotex.zirconium.mixin.fontrendering.ResourceAccessor;
+//import cpw.mods.fml.client.SplashProgress;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.TextRenderer;
@@ -58,7 +58,7 @@ public class FontStrategist {
 
         // create and add the resource pack that provides fonts
         HashMap<String, File> packMap = new HashMap<>();
-        for (int i = 0; i < FontProviderCustom.ATLAS_COUNT; i++) {
+        /*for (int i = 0; i < FontProviderCustom.ATLAS_COUNT; i++) {
             packMap.put(FontProviderCustom.getPrimary().getAtlasResourceName(i), new File(FontProviderCustom.getPrimary().getAtlasFullPath(i)));
             packMap.put(FontProviderCustom.getFallback().getAtlasResourceName(i), new File(FontProviderCustom.getFallback().getAtlasFullPath(i)));
         }
@@ -66,34 +66,25 @@ public class FontStrategist {
         BuiltInResourcePack fontResourcePack = new BuiltInResourcePack(packMap);
         List defaultResourcePacks = ((ResourceAccessor) Minecraft.getMinecraft()).angelica$getBuiltInResourcePacks();
         defaultResourcePacks.add(fontResourcePack);
-        Minecraft.getMinecraft().refreshResources();
+        Minecraft.getMinecraft().refreshResources();*/
     }
 
     /**
      Lets you get a FontProvider per char while respecting font priority and fallbacks, the unicode flag, whether or not
      SGA is on, if we're in a splash screen, if a font can even display a character in the first place, etc.
      */
-    public static FontProvider getFontProvider(BatchingTextRenderer me, char chr, boolean customFontEnabled, boolean forceUnicode) {
+    public static FontProvider getFontProvider(BatchingTextRenderer me, char chr, boolean forceUnicode) {
         if (me.isSGA && FontProviderMC.get(true).isGlyphAvailable(chr)) {
             return FontProviderMC.get(true);
         }
-        if (customFontEnabled && !me.isSplash) {
-            FontProvider fp;
-            fp = FontProviderCustom.getPrimary();
-            if (fp.isGlyphAvailable(chr)) { return fp; }
-            fp = FontProviderCustom.getFallback();
-            if (fp.isGlyphAvailable(chr)) { return fp; }
-            return FontProviderUnicode.get();
+        if (!forceUnicode && FontProviderMC.get(false).isGlyphAvailable(chr)) {
+            return FontProviderMC.get(false);
         } else {
-            if (!forceUnicode && FontProviderMC.get(false).isGlyphAvailable(chr)) {
-                return FontProviderMC.get(false);
-            } else {
-                return FontProviderUnicode.get();
-            }
+            return FontProviderUnicode.get();
         }
     }
 
-    public static void reloadCustomFontProviders() {
+    /*public static void reloadCustomFontProviders() {
         FontProviderCustom.getPrimary().setFont(null);
         FontProviderCustom.getFallback().setFont(null);
         for (int i = 0; i < availableFonts.length; i++) {
@@ -104,7 +95,7 @@ public class FontStrategist {
                 FontProviderCustom.getFallback().reloadFont(i);
             }
         }
-    }
+    }*/
 
     /*public static boolean isSplashTextRendererActive(TextRenderer TextRenderer) {
         // noinspection deprecation

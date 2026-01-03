@@ -1,6 +1,6 @@
-package com.gtnewhorizons.angelica.mixins.interfaces;
+package net.eliotex.zirconium.mixin.fontbatching;
 
-import com.gtnewhorizons.angelica.client.font.BatchingTextRenderer;
+import net.eliotex.zirconium.client.font.BatchingTextRenderer;
 import net.minecraft.resource.Identifier;
 
 public interface TextRendererAccessor {

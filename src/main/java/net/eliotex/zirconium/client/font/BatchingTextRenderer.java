@@ -1,4 +1,4 @@
-package com.gtnewhorizons.angelica.client.font;
+package net.eliotex.zirconium.client.font;
 
 import com.google.common.collect.ImmutableSet;
 import com.gtnewhorizon.gtnhlib.util.font.GlyphReplacements;
@@ -48,15 +48,15 @@ public class BatchingTextRenderer {
     /** Location of the primary font atlas to bind. */
     protected final Identifier locationFontTexture;
 
-    private final int AAMode;
+    /*private final int AAMode;
     private final int AAStrength;
     private final int texBoundAttrLocation;
     private final int fontShaderId;
 
     final boolean isSGA;
-    final boolean isSplash;
+    final boolean isSplash;*/
 
-    private static class FontAAShader {
+    /*private static class FontAAShader {
 
         private static Program fontShader = null;
         public static Program getProgram() {
@@ -74,7 +74,7 @@ public class BatchingTextRenderer {
             }
             return fontShader;
         }
-    }
+    }*/
 
     public BatchingTextRenderer(TextRenderer underlying, int[] charWidth, byte[] glyphWidth,
                                 int[] colorCode, Identifier locationFontTexture) {
@@ -96,10 +96,10 @@ public class BatchingTextRenderer {
         FontProviderUnicode.get().glyphWidth = this.glyphWidth;
 
         //noinspection deprecation
-        fontShaderId = FontAAShader.getProgram().getProgramId();
+        /*fontShaderId = FontAAShader.getProgram().getProgramId();
         AAMode = GL20.glGetUniformLocation(fontShaderId, "aaMode");
         AAStrength = GL20.glGetUniformLocation(fontShaderId, "strength");
-        texBoundAttrLocation = GL20.glGetAttribLocation(fontShaderId, "texBounds");
+        texBoundAttrLocation = GL20.glGetAttribLocation(fontShaderId, "texBounds");*/
     }
 
     // === Batched rendering
@@ -276,8 +276,8 @@ public class BatchingTextRenderer {
     }
 
     int lastActiveProgram;
-    int fontAAModeLast = -1;
-    int fontAAStrengthLast = -1;
+    /*int fontAAModeLast = -1;
+    int fontAAStrengthLast = -1;*/
     private void flushBatch() {
         final int prevProgram = GLStateManager.glGetInteger(GL20.GL_CURRENT_PROGRAM);
 
@@ -295,7 +295,7 @@ public class BatchingTextRenderer {
         GLStateManager.tryBlendFuncSeparate(blendSrcRGB, blendDstRGB, GL11.GL_ONE, GL11.GL_ZERO);
         GLStateManager.glShadeModel(GL11.GL_FLAT);
 
-        final boolean canUseAA = FontConfig.fontAAMode != 0 && prevProgram == 0;
+        /*final boolean canUseAA = FontConfig.fontAAMode != 0 && prevProgram == 0;
         if (canUseAA) {
             GL20.glVertexAttribPointer(texBoundAttrLocation, 4, false, 0, batchVtxTexBounds);
             GL20.glEnableVertexAttribArray(texBoundAttrLocation);
@@ -309,7 +309,7 @@ public class BatchingTextRenderer {
                 fontAAStrengthLast = FontConfig.fontAAStrength;
                 GL20.glUniform1f(AAStrength, FontConfig.fontAAStrength / 120.f);
             }
-        }
+        }*/
 
         GL13.glClientActiveTexture(GL13.GL_TEXTURE0);
         GL11.glTexCoordPointer(2, 0, batchVtxTexCoords);
@@ -345,10 +345,10 @@ public class BatchingTextRenderer {
 
             GL11.glDrawElements(GL11.GL_TRIANGLES, batchIndices);
         }
-        if (canUseAA) {
+        /*if (canUseAA) {
             GLStateManager.glUseProgram(lastActiveProgram);
             GL20.glDisableVertexAttribArray(texBoundAttrLocation);
-        }
+        }*/
 
         GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
         GL11.glDisableClientState(GL11.GL_COLOR_ARRAY);
@@ -508,12 +508,12 @@ public class BatchingTextRenderer {
                     continue;
                 }
 
-                if (FontConfig.enableCustomFont) {
+                /*if (FontConfig.enableCustomFont) {
                     String chrReplacement = GlyphReplacements.customGlyphs.get(String.valueOf(chr));
                     if (chrReplacement != null) {
                         chr = chrReplacement.charAt(0);
                     }
-                }
+                }*/
 
                 if (curRandom) {
                     chr = FontProviderMC.get(this.isSGA).getRandomReplacement(chr);
@@ -611,7 +611,7 @@ public class BatchingTextRenderer {
             return 4 * this.getWhitespaceScale();
         }
 
-        FontProvider fp = FontStrategist.getFontProvider(this, chr, FontConfig.enableCustomFont, underlying.getUnicodeFlag());
+        FontProvider fp = FontStrategist.getFontProvider(this, chr, underlying.getUnicodeFlag());
 
         return fp.getXAdvance(chr) * this.getGlyphScaleX();
     }

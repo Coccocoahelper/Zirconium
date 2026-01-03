@@ -1,4 +1,4 @@
-package com.gtnewhorizons.angelica.client.font;
+package net.eliotex.zirconium.client.font;
 
 import com.gtnewhorizons.angelica.config.FontConfig;
 import it.unimi.dsi.fastutil.chars.Char2ShortOpenHashMap;

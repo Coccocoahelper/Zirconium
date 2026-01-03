@@ -1,4 +1,4 @@
-package com.gtnewhorizons.angelica.client.font;
+package net.eliotex.zirconium.client.font;
 
 import net.minecraft.resource.Identifier;
 
