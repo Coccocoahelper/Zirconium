@@ -5,7 +5,7 @@ import com.gtnewhorizon.gtnhlib.util.font.GlyphReplacements;
 import com.gtnewhorizons.angelica.config.FontConfig;
 import com.gtnewhorizons.angelica.glsm.GLStateManager;
 import com.gtnewhorizons.angelica.mixins.interfaces.TextRendererAccessor;
-import cpw.mods.fml.client.SplashProgress;
+//import cpw.mods.fml.client.SplashProgress;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.coderbot.iris.gl.program.Program;
 import net.coderbot.iris.gl.program.ProgramBuilder;
