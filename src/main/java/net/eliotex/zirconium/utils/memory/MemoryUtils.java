@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-public class MemoryUtilities {
+public class MemoryUtils {
     public static FloatBuffer memAllocFloat(int size) {
         return BufferUtils.createFloatBuffer(size);
     }

@@ -214,8 +214,8 @@ public class BatchingTextRenderer {
         }
 
         public static final Comparator<FontDrawCmd> DRAW_ORDER_COMPARATOR = Comparator.comparing((FontDrawCmd fdc) -> fdc.texture,
-                Comparator.nullsLast(Comparator.comparing(Identifier::getResourceDomain)
-                        .thenComparing(Identifier::getResourcePath))).thenComparing(fdc -> fdc.startVtx);
+                Comparator.nullsLast(Comparator.comparing(Identifier::getNamespace)
+                        .thenComparing(Identifier::getPath))).thenComparing(fdc -> fdc.startVtx);
     }
 
     /**
@@ -250,10 +250,10 @@ public class BatchingTextRenderer {
         boolean textureChanged = false;
 
         Identifier lastTexture = DUMMY_RESOURCE_LOCATION;
-        GlStateManager.enableTexture2D();
-        GlStateManager.enableAlpha();
+        GlStateManager.enableTexture();
+        GlStateManager.enableAlphaTest();
         GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
+        GlStateManager.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
         GlStateManager.shadeModel(GL11.GL_FLAT);
 
         GL11.glTexCoordPointer(2, 0, batchVtxTexCoords);
@@ -262,7 +262,7 @@ public class BatchingTextRenderer {
         GL11.glEnableClientState(GL11.GL_COLOR_ARRAY);
         GL11.glVertexPointer(2, 0, batchVtxPositions);
         GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
         // Use plain for loop to avoid allocations
         final FontDrawCmd[] cmdsData = batchCommands.elements();
@@ -284,8 +284,8 @@ public class BatchingTextRenderer {
             batchIndices.limit(cmd.startVtx + cmd.idxCount);
             batchIndices.position(cmd.startVtx);
 
-            Minecraft mc = Minecraft.getMinecraft();
-            int scaleFactor = new Window(mc).getScaleFactor();
+            Minecraft mc = Minecraft.getInstance();
+            int scaleFactor = new Window(mc).getScale();
             boolean shouldApplyFilter = cmd.isUnicode && scaleFactor % 2 != 0;
 
             if (shouldApplyFilter) {
@@ -352,8 +352,8 @@ public class BatchingTextRenderer {
         float curX = anchorX;
         try {
             final int totalStringLength = string.length();
-            stringOffset = MathHelper.clamp_int(stringOffset, 0, totalStringLength);
-            stringLength = MathHelper.clamp_int(stringLength, 0, totalStringLength - stringOffset);
+            stringOffset = MathHelper.clamp(stringOffset, 0, totalStringLength);
+            stringLength = MathHelper.clamp(stringLength, 0, totalStringLength - stringOffset);
             if (stringLength <= 0) {
                 return 0;
             }
@@ -367,10 +367,10 @@ public class BatchingTextRenderer {
             boolean curStrikethrough = false;
             boolean curUnderline = false;
 
-            final float underlineY = anchorY + underlying.FONT_HEIGHT - 1.0f;
+            final float underlineY = anchorY + underlying.fontHeight - 1.0f;
             float underlineStartX = 0.0f;
             float underlineEndX = 0.0f;
-            final float strikethroughY = anchorY + (float) (underlying.FONT_HEIGHT / 2) - 1.0F;
+            final float strikethroughY = anchorY + (float) (underlying.fontHeight / 2) - 1.0F;
             float strikethroughStartX = 0.0f;
             float strikethroughEndX = 0.0f;
 

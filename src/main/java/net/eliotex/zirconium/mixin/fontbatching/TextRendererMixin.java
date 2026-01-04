@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @author eigenraven
  */
 @Mixin(TextRenderer.class)
-public abstract class MixinTextRenderer implements TextRendererAccessor {
+public abstract class TextRendererMixin implements TextRendererAccessor {
     @Shadow
     private int[] colorCode;
 
