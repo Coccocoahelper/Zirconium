@@ -16,7 +16,6 @@
     "lithium.math.sine.MathHelperAccessor",
     "lithium.math.sine.MathHelperMixin",
     "fogcontrol.GameRendererMixin",
-    "fontbatching.TextRendererAccessor",
     "fontbatching.TextRendererMixin",
     "misc.LivingEntityMixin"
   ],
