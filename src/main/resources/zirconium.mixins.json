@@ -6,9 +6,10 @@
   "mixins": [
     "chunksaving.MinecraftServerMixin",
     "chunksaving.ServerWorldMixin",
-    "fogcontrol.GameRendererMixin",
     "fontbatching.TextRendererMixin",
     "fontbatching.GameGuiMixin",
+    "details.GameRendererMixin",
+    "details.WorldRendererMixin",
     "languagereloading.LanguageSelectionListWidgetMixin",
     "lithium.alloc.PistonBaseBlockMixin",
     "lithium.alloc.PistonMoveStructureResolverMixin",
@@ -18,6 +19,7 @@
     "lithium.math.fastutil.DirectionMixin",
     "lithium.math.sine.MathHelperAccessor",
     "lithium.math.sine.MathHelperMixin",
+    "fontbatching.TextRendererMixin",
     "misc.LivingEntityMixin"
   ],
   "injectors": {
