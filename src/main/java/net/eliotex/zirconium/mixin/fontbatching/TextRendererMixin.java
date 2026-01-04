@@ -23,50 +23,52 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(TextRenderer.class)
 public abstract class TextRendererMixin implements TextRendererAccessor {
     @Shadow
-    private int[] colorCode;
+    private int[] colors;
+
+    // Alpha
+    @Shadow
+    private float a;
+
+    // Red
+    @Shadow
+    private float r;
+
+    // Green
+    @Shadow
+    private float g;
+
+    // Blue
+    @Shadow
+    private float b;
 
     @Shadow
-    private float alpha;
+    protected int[] characterWidths;
 
     @Shadow
-    private float red;
-
-    /** Actually green */
-    @Shadow
-    private float blue;
-
-    /** Actually blue */
-    @Shadow
-    private float green;
+    private boolean unicode;
 
     @Shadow
-    protected int[] charWidth;
+    protected float x;
 
     @Shadow
-    private boolean unicodeFlag;
-
-    @Shadow
-    protected float posX;
-
-    @Shadow
-    protected float posY;
+    protected float y;
 
     @Shadow
     @Final
-    private static Identifier[] unicodePageLocations;
+    private static Identifier[] UNICODE_PAGE_LOCATIONS;
     @Shadow
-    protected byte[] glyphWidth;
+    protected byte[] glyphSizes;
     @Shadow
     @Final
-    protected Identifier locationFontTexture;
+    protected Identifier fontLocation;
     @Shadow
-    private boolean bidiFlag;
+    private boolean bidirectional;
 
     @Shadow
-    protected abstract String bidiReorder(String p_147647_1_);
+    protected abstract String bidirectionalShaping(String text);
 
     @Shadow(remap = false)
-    protected abstract void bindTexture(Identifier location);
+    protected abstract void bindFontPageTexture(Identifier location);
 
     @Unique
     public BatchingTextRenderer angelica$batcher;
@@ -74,7 +76,7 @@ public abstract class TextRendererMixin implements TextRendererAccessor {
     @Inject(method = "<init>", at = @At("TAIL"))
     private void angelica$injectBatcher(GameOptions settings, Identifier fontLocation, TextureManager texManager,
                                         boolean unicodeMode, CallbackInfo ci) {
-        angelica$batcher = new BatchingTextRenderer((TextRenderer) (Object) this, unicodePageLocations, this.charWidth, this.glyphWidth, this.colorCode, this.locationFontTexture);
+        angelica$batcher = new BatchingTextRenderer((TextRenderer) (Object) this, UNICODE_PAGE_LOCATIONS, this.characterWidths, this.glyphSizes, this.colors, this.fontLocation);
     }
 
     /**
@@ -82,7 +84,7 @@ public abstract class TextRendererMixin implements TextRendererAccessor {
      * Batched font renderer is not compatible with display lists, and won't really
      * help performance when display lists are already being used anyway.
      */
-    @Inject(method = "drawString(Ljava/lang/String;FFIZ)I", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "draw(Ljava/lang/String;FFIZ)I", at = @At("HEAD"), cancellable = true)
     public void angelica$BatchedTextRendererDrawString(String text, float x, float y, int argb, boolean dropShadow, CallbackInfoReturnable<Integer> cir)
     {
         if (GL11.glGetInteger(GL11.GL_LIST_MODE) == 0) {
@@ -93,14 +95,14 @@ public abstract class TextRendererMixin implements TextRendererAccessor {
     /**
      * See the above explanation about batched renderer in display lists.
      */
-    @Inject(method = "renderString", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "draw", at = @At("HEAD"), cancellable = true)
     public void angelica$BatchedTextRendererRenderString(String text, float x, float y, int color, boolean dropShadow, CallbackInfoReturnable<Integer> cir) {
         if (GL11.glGetInteger(GL11.GL_LIST_MODE) == 0) {
             cir.setReturnValue(angelica$drawStringBatched(text, x, y, color, dropShadow));
         }
     }
 
-    @Override
+    //@Override
     public int angelica$drawStringBatched(String text, float x, float y, int argb, boolean dropShadow) {
         if (text == null)
         {
@@ -108,9 +110,9 @@ public abstract class TextRendererMixin implements TextRendererAccessor {
         }
         else
         {
-            if (this.bidiFlag)
+            if (this.bidirectional)
             {
-                text = this.bidiReorder(text);
+                text = this.bidirectionalShaping(text);
             }
 
             if ((argb & 0xfc000000) == 0)
@@ -118,14 +120,14 @@ public abstract class TextRendererMixin implements TextRendererAccessor {
                 argb |= 0xff000000;
             }
 
-            this.red = (float)(argb >> 16 & 255) / 255.0F;
-            this.blue = (float)(argb >> 8 & 255) / 255.0F;
-            this.green = (float)(argb & 255) / 255.0F;
-            this.alpha = (float)(argb >> 24 & 255) / 255.0F;
+            this.r = (float)(argb >> 16 & 255) / 255.0F;
+            this.g = (float)(argb >> 8 & 255) / 255.0F;
+            this.b = (float)(argb & 255) / 255.0F;
+            this.a = (float)(argb >> 24 & 255) / 255.0F;
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            this.posX = x;
-            this.posY = y;
-            return (int) angelica$batcher.drawString(x, y, argb, dropShadow, unicodeFlag, text, 0, text.length());
+            this.x = x;
+            this.x = y;
+            return (int) angelica$batcher.drawString(x, y, argb, dropShadow, unicode, text, 0, text.length());
         }
     }
 
@@ -135,6 +137,6 @@ public abstract class TextRendererMixin implements TextRendererAccessor {
     }
 
     @Override
-    public void angelica$bindTexture(Identifier location) { this.bindTexture(location); }
+    public void angelica$bindTexture(Identifier location) { this.bindFontPageTexture(location); }
 
 }
