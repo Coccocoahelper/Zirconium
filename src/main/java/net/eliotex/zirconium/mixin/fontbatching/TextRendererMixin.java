@@ -67,8 +67,8 @@ public abstract class TextRendererMixin implements TextRendererAccessor {
     @Shadow
     protected abstract String bidirectionalShaping(String text);
 
-    @Shadow
-    protected abstract void bind(Identifier location);
+    //@Shadow
+    //protected abstract void bind(Identifier location);
 
     @Unique
     public BatchingTextRenderer angelica$batcher;
@@ -137,6 +137,6 @@ public abstract class TextRendererMixin implements TextRendererAccessor {
     }
 
     @Override
-    public void angelica$bindTexture(Identifier location) { this.bind(location); }
+    public void angelica$bindTexture(Identifier location) { TextureManager.bind(location); }
 
 }
