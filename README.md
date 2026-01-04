@@ -13,7 +13,7 @@ This is an Ornithe port of Eliotex's Zirconium mod, with the following optimizat
 
 Additionally, it has:
 
-- A fog disabling option
+- Detail options (from Celeritas Extra)
 
 Currently requires Java 21 or higher.
 

@@ -1,0 +1,21 @@
+package net.eliotex.zirconium.mixin.disabletextshadows;
+
+import net.eliotex.zirconium.config.ZirconiumConfig;
+import net.minecraft.client.render.TextRenderer;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(TextRenderer.class)
+public class TextRendererMixin {
+
+	@Inject(method = "draw(Ljava/lang/String;FFIZ)I", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/TextRenderer;reset()V"))
+	private void disableTextShadows(String text, float x, float y, int color, boolean shadow, CallbackInfoReturnable<Integer> cir, @Local(argsOnly = true) LocalBooleanRef renderShadow) {
+        if (ZirconiumConfig.instance.disableTextShadows.get()) {
+		    renderShadow.set(false);
+        }
+	}
+}

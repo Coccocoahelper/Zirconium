@@ -36,15 +36,34 @@ public class ZirconiumConfig {
 
 	@Getter
     private final OptionCategory category = OptionCategory.create(Zirconium.MODID);
+	private final OptionCategory details = OptionCategory.create("details");
 
-	public final BooleanOption showFog = new BooleanOption("showFog", true);
+	public final BooleanOption sky = new BooleanOption("sky", true);
+	public final BooleanOption clouds = new BooleanOption("clouds", true);
+	public final BooleanOption stars = new BooleanOption("stars", true);
+	public final BooleanOption sun = new BooleanOption("sun", true);
+	public final BooleanOption moon = new BooleanOption("moon", true);
+	public final BooleanOption fog = new BooleanOption("fog", true);
+	public final BooleanOption disableTextShadows = new BooleanOption("disableTextShadows", false);
 	public final BooleanOption hideDownloadingTerrainScreen = new BooleanOption("hideDownloadingTerrainScreen", true);
 
 	public void initConfig() {
 		category.add(
-			showFog,
+			details
+		);
+		category.add(
+			disableTextShadows,
 			hideDownloadingTerrainScreen
 		);
+
+		details.add(
+			sky,
+			clouds,
+			stars,
+			sun,
+			moon,
+			fog
+		)
 
 		ConfigManager configManager = new VersionedJsonConfigManager(FabricLoader.getInstance().getConfigDir().resolve(Zirconium.MODID + ".json"),
 			category, 1, (configVersion, configVersion1, optionCategory, jsonObject) -> jsonObject);
