@@ -13,20 +13,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 
-    /**
-     * Control fog rendering (simplified version)
-     * This cancels the fog setup, effectively disabling fog
-     */
     @Inject(
         method = "renderFog",
         at = @At("HEAD"),
         cancellable = true
     )
-    private void renderFog(int mode, float tickDelte, CallbackInfo ci) {
+    private void renderFog(int mode, float tickDelta, CallbackInfo ci) {
         if (!ZirconiumConfig.instance.fog.get()) {
             ci.cancel();
         }
     }
 
+    @Inject(
+        method = "renderClouds",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    private void renderClouds(float tickDelta, int anaglyphRenderPass, CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.clouds.get()) {
+            ci.cancel();
+        }
+    }
 }
 

@@ -22,11 +22,11 @@ public abstract class ClientPlayNetworkHandlerMixin implements ClientPlayPacketH
 
     @Redirect(method = "handleLogin", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;openScreen(Lnet/minecraft/client/gui/screen/Screen;)V"))
     private void onGuiDisplayJoin(Minecraft minecraft, Screen screen) {
-        minecraft.openScreen(ZirconiumConfig.instance.hideDownloadingTerrainScreen.get() ? null : screen);
+        minecraft.openScreen(null);
     }
 
     @Redirect(method = "handlePlayerRespawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;openScreen(Lnet/minecraft/client/gui/screen/Screen;)V"))
     private void onGuiDisplayRespawn(Minecraft minecraft, Screen screen) {
-        minecraft.openScreen(ZirconiumConfig.instance.hideDownloadingTerrainScreen.get() ? null : screen);
+        minecraft.openScreen(null);
     }
 }

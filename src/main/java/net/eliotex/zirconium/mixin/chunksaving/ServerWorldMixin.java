@@ -58,9 +58,13 @@ public abstract class ServerWorldMixin {
         }
     }
 
-    @Redirect(method = {"scheduleTick(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;II)V",
-            "scheduleTick(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;II)V"}, at = @At(value = "INVOKE",
-            target = "Ljava/util/TreeSet;add(Ljava/lang/Object;)Z"))
+    @Redirect(
+        method = {
+            "scheduleTick(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;II)V",
+            "scheduleTick(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;II)V"
+        },
+        at = @At(value = "INVOKE", target = "Ljava/util/TreeSet;add(Ljava/lang/Object;)Z")
+    )
     private boolean optimizedchunkloader$indexAdd(TreeSet<ScheduledTick> set, Object obj) {
         ScheduledTick tick = (ScheduledTick) obj;
         boolean added = set.add(tick);
@@ -70,7 +74,10 @@ public abstract class ServerWorldMixin {
         return added;
     }
 
-    @Redirect(method = "doScheduledTicks(Z)Z", at = @At(value = "INVOKE", target = "Ljava/util/TreeSet;remove(Ljava/lang/Object;)Z"))
+    @Redirect(
+        method = "doScheduledTicks(Z)Z",
+        at = @At(value = "INVOKE", target = "Ljava/util/TreeSet;remove(Ljava/lang/Object;)Z")
+    )
     private boolean optimizedchunkloader$indexRemovePending(@NotNull TreeSet<ScheduledTick> set, Object obj) {
         ScheduledTick tick = (ScheduledTick) obj;
         boolean removed = set.remove(tick);
@@ -80,7 +87,10 @@ public abstract class ServerWorldMixin {
         return removed;
     }
 
-    @Redirect(method = "doScheduledTicks(Z)Z", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z"))
+    @Redirect(
+        method = "doScheduledTicks(Z)Z",
+        at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z")
+    )
     private boolean optimizedchunkloader$indexAddRunning(List<ScheduledTick> list, Object obj) {
         ScheduledTick tick = (ScheduledTick) obj;
         bucketAdd(this.fastRunningTicks, keyFor(tick.pos), tick);
@@ -170,9 +180,12 @@ public abstract class ServerWorldMixin {
         if (runningMatches == null) {
             return pendingMatches;
         }
+
         List<ScheduledTick> result = new ArrayList<>(pendingMatches.size() + runningMatches.size());
+
         result.addAll(pendingMatches);
         result.addAll(runningMatches);
+
         return result;
     }
 }

@@ -11,37 +11,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * Controls cloud rendering
- * Cloud height is controlled via MixinWorldProvider
- */
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
 
-    /**
-     * Control cloud rendering
-     */
     @Inject(
-        method = "renderClouds",
+        method = "renderSky",
         at = @At("HEAD"),
         cancellable = true
     )
-    private void renderClouds(float tickDelta, int anaglyphRenderPass, CallbackInfo ci) {
-        if (!ZirconiumConfig.instance.clouds.get()) {
-            ci.cancel();
-        }
-    }
-
-    /**
-     * Control sky rendering
-     * In 1.12.2, sky rendering is in renderSky method
-     */
-    @Inject(
-        method = "renderSky(FI)V",
-        at = @At("HEAD"),
-        cancellable = true
-    )
-    private void renderSky(float tickDelta, int anaglyphRenderPass, CallbackInfo ci) {
+    public void renderSky(float tickDelta, int anaglyphRenderPass, CallbackInfo ci) {
         if (!ZirconiumConfig.instance.sky.get()) {
             ci.cancel();
         }
@@ -51,7 +29,7 @@ public class WorldRendererMixin {
      * Control star rendering by wrapping the star brightness calculation
      * In 1.12.2, stars are rendered based on getStarBrightness
      */
-    @WrapOperation(
+    /*@WrapOperation(
         method = "renderSky(FI)V",
         at = @At(
             value = "INVOKE",
@@ -61,13 +39,13 @@ public class WorldRendererMixin {
     private float wrapGetStarBrightness(World world, float tickDelta, Operation<Float> original) {
         // 0.0f = no rendering
         return ZirconiumConfig.instance.stars.get() ? original.call(world, tickDelta) : 0.0f;
-    }
+    }*/
 
     /**
      * Control sun rendering by wrapping the bindTexture call for sun texture
      * In 1.12.2, the sun texture path is "textures/environment/sun.png"
      */
-    @WrapOperation(
+    /*@WrapOperation(
         method = "renderSky(FI)V",
         at = @At(
             value = "INVOKE",
@@ -79,13 +57,13 @@ public class WorldRendererMixin {
         if (ZirconiumConfig.instance.sun.get()) {
             original.call(instance, buffer, r, g, b);
         }
-    }
+    }*/
 
     /**
      * Control moon rendering by wrapping the bindTexture call for moon texture
      * In 1.12.2, the moon texture path is "textures/environment/moon_phases.png"
      */
-    @WrapOperation(
+    /*@WrapOperation(
         method = "renderSky(FI)V",
         at = @At(
             value = "INVOKE",
@@ -97,5 +75,5 @@ public class WorldRendererMixin {
         if (ZirconiumConfig.instance.moon.get()) {
             original.call(instance, buffer, r, g, b);
         }
-    }
+    }*/
 }

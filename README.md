@@ -4,7 +4,7 @@ This is an Ornithe port of Eliotex's Zirconium mod, with the following optimizat
 - Fast chunk saving (from the original Zirconium mod)
 - Smart language reloading (from Mixces' special mod)
 - Compact sine lookup table (from Jellysquid's Lithium mod)
-- Font batching (from GTNH's Angelica mod, and awruff's port to 1.8.9)
+- Font batching (from GTNH's Angelica mod, and awruff's port to 1.8.9) [CURRENTLY BROKEN, REMOVE THE MIXIN]
 - Hide "Downloading Terrain" screen (from embeddedt's ArchaicFix mod)
 - Effect checking by skipping if none are active (from jss2a98aj's BugTorch mod)
 

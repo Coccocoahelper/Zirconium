@@ -15,14 +15,16 @@ public abstract class GameGuiMixin {
     public abstract TextRenderer getTextRenderer();
 
     @Inject(
-            method = "render", at = @At("HEAD")
+        method = "render",
+        at = @At("HEAD")
     )
     private void begin(float tickDelta, CallbackInfo ci) {
         ((TextRendererAccessor)getTextRenderer()).angelica$getBatcher().beginBatch();
     }
 
     @Inject(
-            method = "render", at = @At("TAIL")
+        method = "render",
+        at = @At("TAIL")
     )
     private void end(float tickDelta, CallbackInfo ci) {
         ((TextRendererAccessor)getTextRenderer()).angelica$getBatcher().endBatch();

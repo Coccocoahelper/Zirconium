@@ -15,7 +15,6 @@
  *
  * For more information, see the LICENSE file.
  */
-
 package net.eliotex.zirconium;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
