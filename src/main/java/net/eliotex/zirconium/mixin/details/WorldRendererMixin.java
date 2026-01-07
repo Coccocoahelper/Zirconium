@@ -68,15 +68,4 @@ public class WorldRendererMixin {
             ci.cancel();
         }
     }
-
-    @Inject(
-        method = "renderStars",
-        at = @At("HEAD"),
-        cancellable = true
-    )
-    public void renderStars(CallbackInfo ci) {
-        if (!ZirconiumConfig.instance.sky.get()) {
-            ci.cancel();
-        }
-    }
 }
