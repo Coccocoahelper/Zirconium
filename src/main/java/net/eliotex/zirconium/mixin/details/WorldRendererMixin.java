@@ -25,55 +25,58 @@ public class WorldRendererMixin {
         }
     }
 
-    /**
-     * Control star rendering by wrapping the star brightness calculation
-     * In 1.12.2, stars are rendered based on getStarBrightness
-     */
-    /*@WrapOperation(
-        method = "renderSky(FI)V",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/World;getStarBrightness(F)F"
-        )
+    @Inject(
+        method = "renderLightSky",
+        at = @At("HEAD"),
+        cancellable = true
     )
-    private float wrapGetStarBrightness(World world, float tickDelta, Operation<Float> original) {
-        // 0.0f = no rendering
-        return ZirconiumConfig.instance.stars.get() ? original.call(world, tickDelta) : 0.0f;
-    }*/
-
-    /**
-     * Control sun rendering by wrapping the bindTexture call for sun texture
-     * In 1.12.2, the sun texture path is "textures/environment/sun.png"
-     */
-    /*@WrapOperation(
-        method = "renderSky(FI)V",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/render/world/WorldRenderer;renderSky(Lcom/mojang/blaze3d/vertex/BufferBuilder;FFZ)V",
-            ordinal = 0
-        )
-    )
-    private void wrapRenderSun(WorldRenderer instance, BufferBuilder buffer, float r, float g, float b, Operation<Void> original) {
-        if (ZirconiumConfig.instance.sun.get()) {
-            original.call(instance, buffer, r, g, b);
+    public void renderLightSky(CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.sky.get()) {
+            ci.cancel();
         }
-    }*/
+    }
 
-    /**
-     * Control moon rendering by wrapping the bindTexture call for moon texture
-     * In 1.12.2, the moon texture path is "textures/environment/moon_phases.png"
-     */
-    /*@WrapOperation(
-        method = "renderSky(FI)V",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/render/world/WorldRenderer;renderSky(Lcom/mojang/blaze3d/vertex/BufferBuilder;FFZ)V",
-            ordinal = 1 
-        )
+    @Inject(
+        method = "renderDarkSky",
+        at = @At("HEAD"),
+        cancellable = true
     )
-    private void wrapRenderMoon(WorldRenderer instance, BufferBuilder buffer, float r, float g, float b, Operation<Void> original) {
-        if (ZirconiumConfig.instance.moon.get()) {
-            original.call(instance, buffer, r, g, b);
+    public void renderDarkSky(CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.sky.get()) {
+            ci.cancel();
         }
-    }*/
+    }
+
+    @Inject(
+        method = "renderEndSky",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    public void renderEndSky(CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.sky.get()) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(
+        method = "renderStars",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    public void renderStars(BufferBuilder bufferBuilder, CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.stars.get()) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(
+        method = "renderStars",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    public void renderStars(CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.sky.get()) {
+            ci.cancel();
+        }
+    }
 }

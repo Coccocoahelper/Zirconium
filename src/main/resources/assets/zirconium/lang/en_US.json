@@ -1,10 +1,12 @@
 {
-    "sky": "Show Sky",
-    "clouds": "Show Clouds",
-    "stars": "Show Stars",
-    "sun": "Show Sun",
-    "moon": "Show Moon",
-    "fog": "Show Fog",
+    "details": "Details",
+    "sky": "Sky",
+    "clouds": "Clouds",
+    "stars": "Stars",
+    "sun": "Sun",
+    "moon": "Moon",
+    "snowAndRain": "Snow & Rain",
+    "fog": "Fog",
     "disableTextShadows": "Disable Text Shadows",
-    "hideDownloadingTerrainScreen": "Hide Downloading Terrain Screen"
+    "renderItemInHand": "Render Item In Hand"
 }

@@ -43,15 +43,18 @@ public class ZirconiumConfig {
 	public final BooleanOption stars = new BooleanOption("stars", true);
 	public final BooleanOption sun = new BooleanOption("sun", true);
 	public final BooleanOption moon = new BooleanOption("moon", true);
+	public final BooleanOption snowAndRain = new BooleanOption("snowAndRain", true);
 	public final BooleanOption fog = new BooleanOption("fog", true);
 	public final BooleanOption disableTextShadows = new BooleanOption("disableTextShadows", false);
+	public final BooleanOption renderItemInHand = new BooleanOption("renderItemInHand", true);
 
 	public void initConfig() {
 		category.add(
 			details
 		);
 		category.add(
-			disableTextShadows
+			disableTextShadows,
+			renderItemInHand
 		);
 
 		details.add(
@@ -60,6 +63,7 @@ public class ZirconiumConfig {
 			stars,
 			sun,
 			moon,
+			snowAndRain,
 			fog
 		);
 

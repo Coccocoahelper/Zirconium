@@ -23,12 +23,45 @@ public class GameRendererMixin {
     }
 
     @Inject(
+        method = "setupFog",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    private void setupFog(float tickDelta, CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.fog.get()) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(
         method = "renderClouds",
         at = @At("HEAD"),
         cancellable = true
     )
     private void renderClouds(WorldRenderer worldRenderer, float tickDelta, int anaglyphRenderPass, CallbackInfo ci) {
         if (!ZirconiumConfig.instance.clouds.get()) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(
+        method = "renderSnowAndRain",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    private void renderSnowAndRain(float tickDelta, CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.snowAndRain.get()) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(
+        method = "renderItemInHand",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    private void renderItemInHand(float tickDelta, int anaglyphRenderPass, CallbackInfo ci) {
+        if (!ZirconiumConfig.instance.renderItemInHand.get()) {
             ci.cancel();
         }
     }
