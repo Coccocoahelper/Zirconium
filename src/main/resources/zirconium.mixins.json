@@ -6,9 +6,6 @@
   "mixins": [
     "chunksaving.MinecraftServerMixin",
     "chunksaving.ServerWorldMixin",
-    "details.GameRendererMixin",
-    "details.WorldRendererMixin",
-    "disabletextshadows.TextRendererMixin",
     "fontbatching.TextRendererMixin",
     "fontbatching.GameGuiMixin",
     "hidedownloadingterrainscreen.ClientPlayNetworkHandlerMixin",
