@@ -6,8 +6,6 @@
   "mixins": [
     "chunksaving.MinecraftServerMixin",
     "chunksaving.ServerWorldMixin",
-    "fontbatching.TextRendererMixin",
-    "fontbatching.GameGuiMixin",
     "hidedownloadingterrainscreen.ClientPlayNetworkHandlerMixin",
     "languagereloading.LanguageSelectionListWidgetMixin",
     "lithium.alloc.PistonBaseBlockMixin",
@@ -19,6 +17,10 @@
     "lithium.math.sine.MathHelperAccessor",
     "lithium.math.sine.MathHelperMixin",
     "misc.LivingEntityMixin"
+  ],
+  "commented_out_mixins": [
+    "fontbatching.TextRendererMixin",
+    "fontbatching.GameGuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1
