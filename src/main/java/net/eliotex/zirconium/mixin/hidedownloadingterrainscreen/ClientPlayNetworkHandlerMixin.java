@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.handler.ClientPlayNetworkHandler;
 import net.minecraft.client.network.handler.ClientPlayPacketHandler;
-import net.eliotex.zirconium.config.ZirconiumConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;

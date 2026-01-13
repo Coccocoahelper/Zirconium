@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
   "id": "zirconium",
-  "version": "0.1.0",
+  "version": "${version}",
   "name": "Zirconium",
   "description": "A mod which ports optimizations from many other mods, esp. from Legacy Fabric and Forge.",
   "authors": [
-    "Eliotex"
+    "Eliotex",
+    "thatonecoder"
   ],
   "contact": {
     "homepage": "https://github.com/Coccocoahelper/Zirconium-Ornithe",
@@ -13,17 +14,6 @@
   },
   "license": "LGPL-3.0-only",
   "environment": "*",
-  "entrypoints": {
-		"client-init": [
-			"net.eliotex.zirconium.Zirconium"
-		],
-		"modmenu": [
-			"net.eliotex.zirconium.ZirconiumModMenu"
-		],
-		"axolotlclient.module": [
-			"net.eliotex.zirconium.AxolotlClientModule"
-		]
-	},
   "mixins": [
     "zirconium.mixins.json"
   ],
@@ -32,6 +22,7 @@
     "minecraft": "1.8.9"
   },
   "suggests": {
-    "another-mod": "Celeritas"
+    "celeritas": "Celeritas",
+    "totllyfine": "TotallyFine"
   }
 }
