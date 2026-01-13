@@ -8,13 +8,9 @@ This is an Ornithe port of Eliotex's Zirconium mod, with the following optimizat
 - Hide "Downloading Terrain" screen (from embeddedt's ArchaicFix mod)
 - Effect checking by skipping if none are active (from jss2a98aj's BugTorch mod)
 
-Additionally, it has:
+For OptiFine-like options, take a look at [TotallyFine](https://github.com/Coccocoahelper/TotallyFine).
 
-- Detail options (from Celeritas Extra)
-- Disable text shadows option (from moehreag's mod)
-
-Currently requires Java 21 or higher.
+Currently requires Java 21 or higher, because yes.
 
 ## License
-
 This is licensed under the LGPL-3.0-only; you can read about it in the `LICENSE` file.
