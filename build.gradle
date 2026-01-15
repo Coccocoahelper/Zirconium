@@ -33,7 +33,7 @@ dependencies {
 
 	implementation("it.unimi.dsi:fastutil:8.5.13")
 
-	//include(implementation("org.lwjgl", "lwjgl", "3.3.6"))
+	include(implementation("org.lwjgl", "lwjgl", "3.3.6"))
     //include "it.unimi.dsi:fastutil:8.5.13"
 
 	ploceus.dependOsl(project.osl_version)
